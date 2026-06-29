@@ -118,6 +118,7 @@ $Timer.Interval  = $DebounceSeconds * 1000
 $Timer.AutoReset = $false
 
 $TimerAction = {
+    try { Write-Log 'TIMER ELAPSED - calling Invoke-AutoPush' } catch {}
     Invoke-AutoPush -Reason 'watcher'
 }
 Register-ObjectEvent -InputObject $Timer -EventName Elapsed -Action $TimerAction | Out-Null

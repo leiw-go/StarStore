@@ -203,6 +203,8 @@
   },
   "active": "2947eea5fd8bfbed",
   "lastOpenFiles": [
+    "test-push-fresh5.md",
+    "scripts/push-bot/watch-and-push.ps1.tmp.3176.be8ec3a7b6df",
     "test-push-fresh4.md",
     "scripts/push-bot/logs/watcher-20260629.log",
     "scripts/push-bot/logs/stderr.log",
@@ -218,7 +220,6 @@
     "scripts/push-bot/watch-and-push.ps1.tmp.3176.7ef885b43416",
     "test-push-temp.md",
     "test-push-temp.md.tmp.3176.a76b061b9435",
-    "scripts/push-bot/logs",
     "欢迎.md",
     "Build-Your-Own-X.md"
   ]
