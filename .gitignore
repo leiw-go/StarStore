@@ -3,3 +3,6 @@
 .trash/
 
 bigbang/source/
+
+# macOS
+.DS_Store
