@@ -8,7 +8,7 @@
 
 ## 📊 统计
 
-- **总词数：** 2
+- **总词数：** 3
 - **创建日期：** 2026-07-01
 - **最近更新：** 2026-07-01
 
@@ -21,6 +21,8 @@
 
 ### 2026-07-01
 
+- **resume** /rɪˈzuːm/ v. 重新开始；继续；重新占用 / /ˈrezəmeɪ/ n. 简历；摘要
+  > 同形异音异义词：动词重音在后（rih-ZOOM），名词重音在前（REH-zo-may）
 - **hyperspace** /ˈhaɪpərspeɪs/ — n. 超空间（科幻设定中的高维空间，星际跃迁媒介）；高维空间
   > 例：_The ship jumped into hyperspace and emerged near Alpha Centauri._（飞船跃入超空间，出现在半人马座附近）
 - **percolate** /ˈpɜːrkəleɪt/ — v. 渗透，渗滤；（想法/信息）逐渐扩散；（咖啡）渗滤式煮
