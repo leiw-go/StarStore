@@ -1,0 +1,1199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e7f0fb" />
+    <title>PromptlyMax — Liquid Glass AI Workspace</title>
+    <style>
+      :root {
+        color: #0d1728;
+        background: #e7f0fb;
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+        --lg-tint: rgb(255 255 255 / 0.2);
+        --lg-tint-strong: rgb(248 252 255 / 0.72);
+        --lg-border: rgb(255 255 255 / 0.58);
+        --lg-highlight: rgb(255 255 255 / 0.58);
+        --lg-shadow: 0 24px 70px rgb(34 55 88 / 0.16);
+        --lg-blur: 24px;
+        --lg-saturation: 145%;
+        --lg-radius: 26px;
+        --ink: #0d1728;
+        --muted: rgb(13 23 40 / 0.66);
+        --soft: rgb(13 23 40 / 0.48);
+        --blue: #2f6f9f;
+        --violet: #7c76a9;
+        --peach: #d8a293;
+        --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100svh;
+        margin: 0;
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -3;
+        background:
+          radial-gradient(circle at 9% 8%, #ffffff 0 9%, transparent 28%),
+          radial-gradient(circle at 78% 11%, rgb(231 197 188 / 0.62) 0 10%, transparent 28%),
+          radial-gradient(circle at 80% 74%, rgb(55 111 152 / 0.34) 0 14%, transparent 36%),
+          linear-gradient(145deg, #f7fbff 0%, #dbeaf5 43%, #c9d7eb 71%, #ead6d0 100%);
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        background:
+          linear-gradient(115deg, rgb(255 255 255 / 0.42), transparent 40%),
+          radial-gradient(circle at 70% 46%, transparent 0 24%, rgb(26 45 77 / 0.1) 58%, transparent 74%);
+        pointer-events: none;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button {
+        color: inherit;
+        font: inherit;
+      }
+
+      .scene-orb {
+        position: fixed;
+        z-index: -1;
+        border-radius: 48% 52% 64% 36% / 46% 38% 62% 54%;
+        filter: blur(2px);
+        opacity: 0.82;
+        pointer-events: none;
+        animation: drift 15s var(--ease-out) infinite alternate;
+      }
+
+      .scene-orb--blue {
+        top: 24%;
+        right: -3%;
+        width: min(44vw, 650px);
+        aspect-ratio: 1.14;
+        background: linear-gradient(150deg, #163b63, #4c86ad 56%, #bddfe0);
+        box-shadow: inset 34px 20px 90px rgb(255 255 255 / 0.24);
+        transform: rotate(-17deg);
+      }
+
+      .scene-orb--violet {
+        right: 25%;
+        bottom: -21%;
+        width: min(38vw, 540px);
+        aspect-ratio: 1;
+        background: linear-gradient(155deg, #6f6d96, #a998bb 48%, #e0c6ca);
+        animation-delay: -5s;
+      }
+
+      .scene-orb--peach {
+        top: 7%;
+        right: 27%;
+        width: min(21vw, 290px);
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #f1d5c3, #d99a86);
+        opacity: 0.5;
+        animation-delay: -9s;
+      }
+
+      .page-shell {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: max(18px, env(safe-area-inset-top)) 0 72px;
+      }
+
+      .glass {
+        position: relative;
+        isolation: isolate;
+        border: 1px solid var(--lg-border);
+        background: rgb(238 244 250 / 0.94);
+        box-shadow:
+          var(--lg-shadow),
+          inset 0 1px 0 rgb(255 255 255 / 0.44);
+      }
+
+      @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .glass {
+          background: var(--lg-tint);
+          -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturation));
+          backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturation));
+        }
+      }
+
+      .glass::before {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        z-index: -1;
+        border-radius: inherit;
+        background:
+          linear-gradient(135deg, rgb(255 255 255 / 0.48), transparent 38%),
+          radial-gradient(circle at 86% 116%, rgb(255 255 255 / 0.18), transparent 42%);
+        pointer-events: none;
+      }
+
+      .site-header {
+        position: sticky;
+        top: max(16px, env(safe-area-inset-top));
+        z-index: 20;
+      }
+
+      .nav-shell {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        min-height: 66px;
+        padding: 8px 10px 8px 20px;
+        border-radius: 24px;
+      }
+
+      .brand,
+      .nav-links,
+      .nav-trigger,
+      .action,
+      .primary-action,
+      .secondary-action {
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .brand {
+        gap: 10px;
+        width: max-content;
+        font-weight: 720;
+        letter-spacing: -0.04em;
+      }
+
+      .brand-mark {
+        width: 19px;
+        height: 19px;
+        border: 1px solid rgb(255 255 255 / 0.78);
+        border-radius: 50% 50% 44% 56%;
+        background: linear-gradient(145deg, #173a62, #8cc3d7);
+        box-shadow: inset 3px 3px 6px rgb(255 255 255 / 0.42);
+      }
+
+      .nav-links {
+        justify-self: center;
+        gap: 6px;
+      }
+
+      .nav-links > a,
+      .nav-trigger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        min-width: 92px;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 15px;
+        background: transparent;
+        color: rgb(13 23 40 / 0.82);
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 630;
+        transition:
+          background-color 160ms ease,
+          transform 160ms ease;
+      }
+
+      .nav-links > a:hover,
+      .nav-trigger:hover,
+      .nav-trigger[aria-expanded="true"] {
+        background: rgb(255 255 255 / 0.26);
+      }
+
+      .nav-item {
+        position: relative;
+        padding-bottom: 14px;
+        margin-bottom: -14px;
+      }
+
+      .nav-trigger {
+        gap: 7px;
+      }
+
+      .nav-trigger span {
+        transition: transform 220ms var(--ease-out);
+      }
+
+      .nav-trigger[aria-expanded="true"] span {
+        transform: rotate(180deg);
+      }
+
+      .dropdown {
+        position: absolute;
+        top: 54px;
+        left: -8px;
+        display: grid;
+        width: 220px;
+        padding: 8px;
+        border-radius: 20px;
+        background: rgb(240 246 252 / 0.94);
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+        transform-origin: top left;
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 190ms ease,
+          transform 250ms var(--ease-out),
+          visibility 190ms;
+      }
+
+      @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+        .dropdown {
+          background: rgb(248 252 255 / 0.62);
+          -webkit-backdrop-filter: blur(30px) saturate(145%);
+          backdrop-filter: blur(30px) saturate(145%);
+        }
+      }
+
+      .dropdown[data-open="true"] {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .dropdown a {
+        padding: 12px 13px;
+        border-radius: 13px;
+        font-size: 14px;
+        transition:
+          background-color 150ms ease,
+          transform 150ms ease;
+      }
+
+      .dropdown a:hover,
+      .dropdown a:focus-visible {
+        background: rgb(255 255 255 / 0.72);
+        transform: translateX(2px);
+      }
+
+      .action {
+        justify-self: end;
+        min-height: 46px;
+        padding: 0 18px;
+        border-radius: 17px;
+        background: rgb(12 23 41 / 0.84);
+        color: white;
+        font-size: 14px;
+        font-weight: 660;
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.16);
+        transition:
+          transform 180ms var(--ease-out),
+          background-color 180ms ease;
+      }
+
+      .action:hover,
+      .primary-action:hover {
+        transform: translateY(-2px);
+      }
+
+      .menu-toggle {
+        display: none;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 0.98fr) minmax(320px, 0.72fr);
+        gap: 56px;
+        align-items: center;
+        min-height: calc(100svh - 104px);
+        padding: 72px 0 64px;
+      }
+
+      .eyebrow {
+        margin: 0 0 18px;
+        color: rgb(13 23 40 / 0.56);
+        font-size: 12px;
+        font-weight: 780;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        text-wrap: balance;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 0;
+        font-size: clamp(58px, 8.4vw, 116px);
+        font-weight: 660;
+        line-height: 0.88;
+        letter-spacing: -0.078em;
+      }
+
+      .lede {
+        max-width: 620px;
+        margin: 32px 0 0;
+        color: var(--muted);
+        font-size: clamp(18px, 2vw, 22px);
+        line-height: 1.48;
+        letter-spacing: -0.02em;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .primary-action,
+      .secondary-action {
+        min-height: 54px;
+        padding: 0 22px;
+        border-radius: 19px;
+        font-size: 15px;
+        font-weight: 680;
+        transition:
+          transform 180ms var(--ease-out),
+          background-color 180ms ease;
+      }
+
+      .primary-action {
+        background: rgb(255 255 255 / 0.26);
+      }
+
+      .secondary-action {
+        color: rgb(13 23 40 / 0.72);
+      }
+
+      .secondary-action span {
+        display: inline-block;
+        margin-left: 6px;
+        transition: transform 180ms var(--ease-out);
+      }
+
+      .secondary-action:hover span {
+        transform: translate(2px, -2px);
+      }
+
+      .hero-panel {
+        overflow: hidden;
+        min-height: 560px;
+        padding: 18px;
+        border-radius: 34px;
+      }
+
+      .panel-window {
+        display: grid;
+        gap: 16px;
+        height: 100%;
+        padding: 22px;
+        border-radius: 28px;
+        background: rgb(248 252 255 / 0.76);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.58);
+      }
+
+      .window-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        color: var(--soft);
+        font-size: 12px;
+        font-weight: 760;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .dots {
+        display: flex;
+        gap: 7px;
+      }
+
+      .dots span {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #8bb5cd;
+      }
+
+      .dots span:nth-child(2) {
+        background: #b2a7c6;
+      }
+
+      .dots span:nth-child(3) {
+        background: #d9b4a9;
+      }
+
+      .prompt-card {
+        padding: 20px;
+        border-radius: 22px;
+        background: linear-gradient(135deg, rgb(255 255 255 / 0.82), rgb(255 255 255 / 0.42));
+        color: var(--muted);
+        box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.62);
+      }
+
+      .prompt-card strong {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--ink);
+        font-size: 15px;
+        letter-spacing: -0.02em;
+      }
+
+      .prompt-card p {
+        margin: 0;
+        line-height: 1.55;
+      }
+
+      .metric-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .metric {
+        min-height: 138px;
+        padding: 18px;
+        border-radius: 22px;
+        background: rgb(255 255 255 / 0.42);
+        box-shadow:
+          inset 0 1px 0 rgb(255 255 255 / 0.54),
+          0 16px 38px rgb(34 55 88 / 0.08);
+      }
+
+      .metric b {
+        display: block;
+        color: var(--ink);
+        font-size: clamp(34px, 4.2vw, 52px);
+        font-weight: 640;
+        line-height: 1;
+        letter-spacing: -0.06em;
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.35;
+      }
+
+      .status-strip {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        margin-top: auto;
+      }
+
+      .status-pill {
+        min-height: 86px;
+        padding: 14px;
+        border-radius: 19px;
+        background: rgb(13 23 40 / 0.06);
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.34;
+      }
+
+      .status-pill strong {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--ink);
+        font-size: 14px;
+      }
+
+      .section {
+        padding: 44px 0;
+      }
+
+      .section-header {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.44fr);
+        gap: 40px;
+        align-items: end;
+        margin-bottom: 24px;
+      }
+
+      .section-title {
+        max-width: 740px;
+        margin: 0;
+        font-size: clamp(38px, 5.8vw, 76px);
+        font-weight: 650;
+        line-height: 0.94;
+        letter-spacing: -0.066em;
+      }
+
+      .section-copy {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.62;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .feature-card {
+        min-height: 286px;
+        padding: 26px;
+        border-radius: 30px;
+      }
+
+      .feature-icon {
+        display: grid;
+        width: 48px;
+        height: 48px;
+        margin-bottom: 34px;
+        place-items: center;
+        border-radius: 17px;
+        background: rgb(255 255 255 / 0.3);
+        color: var(--blue);
+        font-weight: 780;
+      }
+
+      .feature-card h3 {
+        margin: 0 0 12px;
+        font-size: 25px;
+        line-height: 1;
+        letter-spacing: -0.045em;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.58;
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(300px, 0.55fr);
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      .price-card,
+      .audit-card {
+        padding: 32px;
+        border-radius: 34px;
+      }
+
+      .price-card h3,
+      .audit-card h3 {
+        margin: 0;
+        font-size: 28px;
+        letter-spacing: -0.045em;
+      }
+
+      .price {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        margin: 22px 0 16px;
+      }
+
+      .price strong {
+        color: var(--ink);
+        font-size: clamp(58px, 8vw, 104px);
+        font-weight: 640;
+        line-height: 0.84;
+        letter-spacing: -0.075em;
+      }
+
+      .price span {
+        margin-top: 9px;
+        color: var(--soft);
+        font-weight: 700;
+      }
+
+      ul {
+        display: grid;
+        gap: 10px;
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.52;
+      }
+
+      .price-card .primary-action {
+        width: max-content;
+        margin-top: 24px;
+      }
+
+      .audit-card {
+        background: rgb(13 23 40 / 0.82);
+        color: white;
+      }
+
+      .audit-card::before {
+        background:
+          linear-gradient(135deg, rgb(255 255 255 / 0.18), transparent 38%),
+          radial-gradient(circle at 88% 118%, rgb(255 255 255 / 0.12), transparent 42%);
+      }
+
+      .audit-card h3 {
+        color: white;
+      }
+
+      .audit-card ul {
+        color: rgb(255 255 255 / 0.72);
+        margin-top: 22px;
+      }
+
+      .chat-bubble {
+        margin: 18px 0 0 auto;
+        width: min(330px, calc(100vw - 40px));
+        padding: 16px;
+        border-radius: 24px;
+      }
+
+      .chat-bubble strong {
+        display: block;
+        margin-bottom: 5px;
+        letter-spacing: -0.02em;
+      }
+
+      .chat-bubble p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.46;
+      }
+
+      .panic-button {
+        width: 100%;
+        min-height: 44px;
+        margin-top: 12px;
+        border: 0;
+        border-radius: 999px;
+        background: rgb(13 23 40 / 0.86);
+        color: white;
+        cursor: pointer;
+        font-weight: 700;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(14 74 128 / 0.72);
+        outline-offset: 3px;
+      }
+
+      @keyframes drift {
+        to {
+          transform: translate3d(-20px, 18px, 0) rotate(-11deg) scale(1.04);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .page-shell {
+          width: min(100% - 32px, 780px);
+        }
+
+        .nav-shell {
+          grid-template-columns: 1fr auto;
+          padding: 8px 8px 8px 16px;
+        }
+
+        .menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          min-height: 46px;
+          padding: 0 14px;
+          border: 0;
+          border-radius: 16px;
+          background: rgb(255 255 255 / 0.24);
+          cursor: pointer;
+        }
+
+        .menu-toggle__icon,
+        .menu-toggle__icon::before {
+          display: block;
+          width: 15px;
+          height: 1.5px;
+          background: currentColor;
+          transition: transform 220ms var(--ease-out);
+        }
+
+        .menu-toggle__icon {
+          position: relative;
+        }
+
+        .menu-toggle__icon::before {
+          content: "";
+          position: absolute;
+          transform: translateY(5px);
+        }
+
+        .menu-toggle[aria-expanded="true"] .menu-toggle__icon {
+          transform: rotate(45deg) translateY(2px);
+        }
+
+        .menu-toggle[aria-expanded="true"] .menu-toggle__icon::before {
+          transform: rotate(90deg);
+        }
+
+        .nav-links {
+          grid-column: 1 / -1;
+          z-index: 2;
+          display: grid;
+          justify-self: stretch;
+          width: 100%;
+          align-items: stretch;
+          grid-auto-rows: minmax(50px, auto);
+          gap: 4px;
+          max-height: 0;
+          margin-top: 0;
+          padding: 10px;
+          border: 1px solid rgb(255 255 255 / 0.58);
+          border-radius: 22px;
+          background: rgb(238 244 250 / 0.96);
+          box-shadow: var(--lg-shadow);
+          overflow: hidden;
+          opacity: 0;
+          transform: translateY(-6px);
+          visibility: hidden;
+          pointer-events: none;
+          transition:
+            max-height 260ms var(--ease-out),
+            margin-top 220ms var(--ease-out),
+            opacity 180ms ease,
+            transform 240ms var(--ease-out),
+            visibility 180ms;
+        }
+
+        @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+          .nav-links {
+            background: rgb(238 244 250 / 0.98);
+            -webkit-backdrop-filter: blur(34px) saturate(145%);
+            backdrop-filter: blur(34px) saturate(145%);
+          }
+        }
+
+        .nav-links[data-open="true"] {
+          max-height: 420px;
+          margin-top: 10px;
+          opacity: 1;
+          transform: translateY(0);
+          visibility: visible;
+          pointer-events: auto;
+        }
+
+        .nav-links > a,
+        .nav-trigger {
+          justify-content: space-between;
+          width: 100%;
+          min-width: 0;
+          min-height: 48px;
+          padding-inline: 16px;
+          border-radius: 16px;
+          background: rgb(255 255 255 / 0.42);
+          color: var(--ink);
+          font-size: 16px;
+        }
+
+        .nav-item {
+          padding: 0;
+          margin: 0;
+        }
+
+        .dropdown {
+          position: static;
+          width: 100%;
+          max-height: 0;
+          padding: 0 8px;
+          overflow: hidden;
+          border-width: 0;
+          opacity: 0;
+          transform: none;
+          visibility: hidden;
+          transition:
+            max-height 260ms var(--ease-out),
+            padding 260ms var(--ease-out),
+            opacity 180ms ease;
+        }
+
+        .dropdown[data-open="true"] {
+          max-height: 220px;
+          padding: 8px;
+          border-width: 1px;
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .action {
+          display: none;
+        }
+
+        .hero,
+        .section-header,
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          gap: 34px;
+          min-height: auto;
+          padding-top: 60px;
+        }
+
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .status-strip {
+          grid-template-columns: 1fr;
+        }
+
+        .chat-bubble {
+          width: 100%;
+          margin-top: 28px;
+        }
+
+        .scene-orb--blue {
+          right: -38%;
+          width: 98vw;
+        }
+
+        .scene-orb--violet {
+          right: -40%;
+          width: 92vw;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page-shell {
+          width: min(100% - 28px, 780px);
+        }
+
+        h1 {
+          font-size: clamp(50px, 16vw, 74px);
+        }
+
+        .hero-panel,
+        .panel-window,
+        .price-card,
+        .audit-card,
+        .feature-card {
+          border-radius: 26px;
+          padding: 22px;
+        }
+
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-actions {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      @media (forced-colors: active) {
+        .glass,
+        .nav-links,
+        .dropdown {
+          border: 1px solid CanvasText;
+          background: Canvas;
+          color: CanvasText;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <span class="scene-orb scene-orb--blue" aria-hidden="true"></span>
+    <span class="scene-orb scene-orb--violet" aria-hidden="true"></span>
+    <span class="scene-orb scene-orb--peach" aria-hidden="true"></span>
+
+    <div class="page-shell">
+      <header class="site-header">
+        <nav class="glass nav-shell" aria-label="Primary navigation">
+          <a class="brand" href="#" aria-label="PromptlyMax home">
+            <span class="brand-mark"></span>
+            <span>PromptlyMax</span>
+          </a>
+
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+            <span>Menu</span>
+            <span class="menu-toggle__icon" aria-hidden="true"></span>
+          </button>
+
+          <div class="nav-links" id="nav-links">
+            <a href="#features">Product</a>
+            <div class="nav-item">
+              <button class="nav-trigger" type="button" aria-expanded="false">
+                Solutions <span aria-hidden="true">⌄</span>
+              </button>
+              <div class="glass dropdown">
+                <a href="#features">Brand systems</a>
+                <a href="#pricing">Growth workspace</a>
+                <a href="#audit">Design audit</a>
+              </div>
+            </div>
+            <a href="#pricing">Pricing</a>
+            <a href="#audit">Quality</a>
+          </div>
+
+          <a class="action" href="#pricing">Start refining</a>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero">
+          <div>
+            <p class="eyebrow">AI workspace · redesigned with FU—Liquiglass</p>
+            <h1>Clearer AI pages with light inside them.</h1>
+            <p class="lede">
+              PromptlyMax turns scattered AI output into a composed product workspace: readable
+              navigation, grounded claims, restrained glass, and calm motion that keeps the
+              interface usable.
+            </p>
+            <div class="hero-actions">
+              <a class="glass primary-action" href="#features">Explore the system</a>
+              <a class="secondary-action" href="#audit">See what changed <span>↗</span></a>
+            </div>
+          </div>
+
+          <aside class="glass hero-panel" aria-label="AI workspace preview">
+            <div class="panel-window">
+              <div class="window-top">
+                <span>Workspace summary</span>
+                <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
+              </div>
+
+              <div class="prompt-card">
+                <strong>Design brief</strong>
+                <p>
+                  Replace noisy AI-generated spectacle with a premium material system: calm
+                  background, readable hierarchy, selective glass, and production-ready interaction.
+                </p>
+              </div>
+
+              <div class="metric-grid">
+                <div class="metric">
+                  <b>3</b>
+                  <span>material levels for navigation, cards, and dense menus</span>
+                </div>
+                <div class="metric">
+                  <b>8/8</b>
+                  <span>liquid-glass safeguards detected by the audit script</span>
+                </div>
+                <div class="metric">
+                  <b>24px</b>
+                  <span>baseline blur, tuned with tint instead of visual fog</span>
+                </div>
+                <div class="metric">
+                  <b>44px</b>
+                  <span>minimum touch target for mobile navigation controls</span>
+                </div>
+              </div>
+
+              <div class="status-strip">
+                <div class="status-pill">
+                  <strong>Background</strong>
+                  Broad tonal fields keep text stable.
+                </div>
+                <div class="status-pill">
+                  <strong>Motion</strong>
+                  Short state changes, no filter animation.
+                </div>
+                <div class="status-pill">
+                  <strong>Fallbacks</strong>
+                  Opaque surfaces preserve readability.
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" id="features">
+          <div class="section-header">
+            <h2 class="section-title">From generated chaos to a coherent interface system.</h2>
+            <p class="section-copy">
+              The page keeps the original AI product idea, but removes the inflated claims, scattered
+              cards, and high-frequency decoration that made the baseline feel cheap.
+            </p>
+          </div>
+
+          <div class="feature-grid">
+            <article class="glass feature-card">
+              <span class="feature-icon">01</span>
+              <h3>Calm background first.</h3>
+              <p>
+                Large gradients and a few soft forms create refraction without placing visual noise
+                directly behind copy or navigation.
+              </p>
+            </article>
+
+            <article class="glass feature-card">
+              <span class="feature-icon">02</span>
+              <h3>Glass with hierarchy.</h3>
+              <p>
+                Navigation, panels, and menus use related but distinct opacity, blur, edge light, and
+                shadow levels.
+              </p>
+            </article>
+
+            <article class="glass feature-card">
+              <span class="feature-icon">03</span>
+              <h3>Interaction stays quiet.</h3>
+              <p>
+                Hover, click, keyboard focus, Escape close, and mobile menu behavior all share one
+                predictable state model.
+              </p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section pricing" id="pricing">
+          <article class="glass price-card">
+            <p class="eyebrow">Starter plan</p>
+            <h3>Refine one AI-generated landing page.</h3>
+            <div class="price">
+              <strong>$9</strong>
+              <span>/month demo pricing</span>
+            </div>
+            <ul>
+              <li>Replace buzzword-heavy sections with clear product hierarchy.</li>
+              <li>Apply reusable glass tokens instead of one-off effects.</li>
+              <li>Support desktop hover, keyboard focus, and touch navigation.</li>
+              <li>Keep fallback surfaces readable when blur is unsupported.</li>
+            </ul>
+            <a class="glass primary-action" href="#audit">Audit this page</a>
+          </article>
+
+          <aside class="glass audit-card" id="audit">
+            <p class="eyebrow">Quality pass</p>
+            <h3>What FU—Liquiglass improved</h3>
+            <ul>
+              <li>Replaced neon noise with broad, stable tonal structure.</li>
+              <li>Reduced glow, shadow, and gradient intensity across the page.</li>
+              <li>Made the navigation legible, responsive, and keyboard-aware.</li>
+              <li>Separated glass hierarchy for nav, dropdowns, cards, and panel UI.</li>
+              <li>Added reduced-motion and forced-colors safeguards.</li>
+            </ul>
+          </aside>
+        </section>
+
+        <aside class="glass chat-bubble" aria-label="AI assistant">
+          <strong>Refinement assistant</strong>
+          <p>
+            This page was intentionally transformed from an overcooked AI baseline into a calmer,
+            demo-ready liquid-glass experience.
+          </p>
+          <button class="panic-button" type="button">Show refinement note</button>
+        </aside>
+      </main>
+    </div>
+
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const navLinks = document.querySelector(".nav-links");
+      const navItem = document.querySelector(".nav-item");
+      const navTrigger = document.querySelector(".nav-trigger");
+      const dropdown = document.querySelector(".dropdown");
+      const noteButton = document.querySelector(".panic-button");
+      let pointerActivatingTrigger = false;
+
+      function setDropdown(open) {
+        navTrigger.setAttribute("aria-expanded", String(open));
+        dropdown.dataset.open = String(open);
+      }
+
+      function setMobileMenu(open) {
+        menuToggle.setAttribute("aria-expanded", String(open));
+        navLinks.dataset.open = String(open);
+        if (!open) setDropdown(false);
+      }
+
+      navItem.addEventListener("pointerenter", () => {
+        if (window.matchMedia("(hover: hover) and (min-width: 901px)").matches) setDropdown(true);
+      });
+
+      navItem.addEventListener("pointerleave", () => {
+        if (window.matchMedia("(hover: hover) and (min-width: 901px)").matches) setDropdown(false);
+      });
+
+      navTrigger.addEventListener("pointerdown", () => {
+        pointerActivatingTrigger = true;
+      });
+
+      navItem.addEventListener("focusin", () => {
+        if (!pointerActivatingTrigger) setDropdown(true);
+      });
+
+      navItem.addEventListener("focusout", (event) => {
+        if (!navItem.contains(event.relatedTarget)) setDropdown(false);
+      });
+
+      navTrigger.addEventListener("click", () => {
+        setDropdown(navTrigger.getAttribute("aria-expanded") !== "true");
+        pointerActivatingTrigger = false;
+      });
+
+      menuToggle.addEventListener("click", () => {
+        setMobileMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      document.addEventListener("pointerdown", (event) => {
+        if (!event.target.closest(".nav-shell")) {
+          setDropdown(false);
+          setMobileMenu(false);
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          setDropdown(false);
+          setMobileMenu(false);
+          menuToggle.focus();
+        }
+      });
+
+      navLinks.addEventListener("click", (event) => {
+        if (event.target.matches("a") && window.innerWidth <= 900) setMobileMenu(false);
+      });
+
+      noteButton.addEventListener("click", () => {
+        noteButton.textContent = "Noise reduced. Hierarchy restored.";
+      });
+    </script>
+  </body>
+</html>

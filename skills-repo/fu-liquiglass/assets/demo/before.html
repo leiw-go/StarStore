@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#7ea0c6" />
+    <title>Before — Original Navigation Reference</title>
+    <style>
+      :root {
+        color: #ffffff;
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        min-width: 320px;
+        min-height: 100%;
+        margin: 0;
+      }
+
+      body {
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 68% 8%, rgb(255 255 255 / 0.1), transparent 22%),
+          linear-gradient(180deg, #6f91b8 0%, #86a8c9 45%, #a7bfd5 100%);
+      }
+
+      a,
+      button {
+        color: inherit;
+        font: inherit;
+      }
+
+      button {
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .reference-scene {
+        position: relative;
+        min-height: 100svh;
+        overflow: hidden;
+      }
+
+      .reference-scene::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(90deg, rgb(67 97 127 / 0.28), transparent 28%, transparent 74%, rgb(255 232 182 / 0.18)),
+          radial-gradient(ellipse at 70% 48%, transparent 0 21%, rgb(20 35 32 / 0.12) 48%, transparent 66%);
+        pointer-events: none;
+      }
+
+      .wild-column {
+        position: absolute;
+        top: -34%;
+        right: -2%;
+        width: min(58vw, 540px);
+        min-width: 330px;
+        height: 166vh;
+        transform: rotate(13deg);
+        transform-origin: 50% 46%;
+        border-radius: 48% 52% 46% 54% / 39% 44% 56% 61%;
+        background:
+          radial-gradient(ellipse at 42% 36%, #1a321b 0 16%, transparent 39%),
+          radial-gradient(ellipse at 60% 58%, #6a8c30 0 19%, transparent 43%),
+          radial-gradient(ellipse at 48% 75%, #35551f 0 24%, transparent 55%),
+          linear-gradient(96deg, #203d20, #6f933a 44%, #cedb72 71%, #eef0b8 100%);
+        box-shadow:
+          -34px 34px 70px rgb(21 42 39 / 0.28),
+          inset 22px 0 70px rgb(255 255 255 / 0.22),
+          inset -36px 0 80px rgb(24 50 20 / 0.34);
+        filter: saturate(1.08) contrast(1.04);
+      }
+
+      .wild-column::before,
+      .wild-column::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+      }
+
+      .wild-column::before {
+        background:
+          radial-gradient(circle, #54200d 0 3px, #e7a021 3.4px 8px, transparent 8.5px) 16px 42px / 92px 86px,
+          radial-gradient(circle, #6b2911 0 2px, #f5b937 2.4px 6.5px, transparent 7px) 62px 8px / 118px 104px,
+          radial-gradient(circle, #e5dcae 0 2.5px, #ffffff 2.8px 6px, transparent 6.5px) 8px 10px / 74px 78px,
+          radial-gradient(circle, #f3eccd 0 2px, #fff 2.4px 5px, transparent 5.8px) 48px 54px / 96px 94px,
+          radial-gradient(circle at 48% 52%, rgb(255 236 111 / 0.5), transparent 0 2px, transparent 3px);
+        opacity: 0.94;
+        mix-blend-mode: normal;
+      }
+
+      .wild-column::after {
+        background:
+          repeating-linear-gradient(
+            105deg,
+            transparent 0 9px,
+            rgb(236 244 172 / 0.16) 10px 12px,
+            transparent 13px 25px
+          ),
+          repeating-linear-gradient(
+            75deg,
+            transparent 0 12px,
+            rgb(21 58 24 / 0.22) 13px 15px,
+            transparent 16px 30px
+          );
+        opacity: 0.78;
+        mix-blend-mode: soft-light;
+      }
+
+      .reference-nav {
+        position: absolute;
+        top: 32.2%;
+        left: 50%;
+        z-index: 2;
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(20px, 4vw, 34px);
+        transform: translateX(-50%);
+        white-space: nowrap;
+        text-shadow: 0 1px 12px rgb(0 0 0 / 0.36);
+      }
+
+      .nav-item {
+        position: relative;
+        padding-bottom: 22px;
+        margin-bottom: -22px;
+      }
+
+      .nav-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 28px;
+        padding: 0;
+        font-size: 14px;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+      }
+
+      .nav-link span {
+        color: rgb(255 255 255 / 0.78);
+        font-size: 13px;
+        transition: transform 180ms ease;
+      }
+
+      .nav-item[data-open="true"] .nav-link span {
+        transform: rotate(180deg);
+      }
+
+      .before-dropdown {
+        position: absolute;
+        top: 35px;
+        left: 0;
+        display: grid;
+        width: 192px;
+        padding: 13px 10px;
+        border: 1px solid rgb(155 185 109 / 0.42);
+        border-radius: 22px;
+        background: rgb(32 66 31 / 0.2);
+        box-shadow:
+          0 18px 44px rgb(0 0 0 / 0.12),
+          inset 0 1px 0 rgb(255 255 255 / 0.22);
+        -webkit-backdrop-filter: blur(12px) saturate(135%);
+        backdrop-filter: blur(12px) saturate(135%);
+        opacity: 0;
+        transform: translateY(-6px);
+        visibility: hidden;
+        pointer-events: none;
+        transition:
+          opacity 170ms ease,
+          transform 210ms ease,
+          visibility 170ms;
+      }
+
+      .nav-item[data-open="true"] .before-dropdown,
+      .nav-item:hover .before-dropdown,
+      .nav-item:focus-within .before-dropdown {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      .before-dropdown a {
+        display: block;
+        padding: 11px 8px;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 590;
+        text-decoration: none;
+      }
+
+      .before-dropdown a:hover,
+      .before-dropdown a:focus-visible {
+        background: rgb(255 255 255 / 0.14);
+      }
+
+      .demo-label {
+        position: absolute;
+        left: 24px;
+        bottom: 20px;
+        z-index: 3;
+        max-width: 300px;
+        margin: 0;
+        color: rgb(255 255 255 / 0.74);
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(255 255 255 / 0.72);
+        outline-offset: 4px;
+      }
+
+      @media (max-width: 640px) {
+        .wild-column {
+          right: -44%;
+          width: 96vw;
+          min-width: 0;
+        }
+
+        .reference-nav {
+          top: 21%;
+          left: 24px;
+          right: 24px;
+          flex-direction: column;
+          gap: 8px;
+          transform: none;
+        }
+
+        .nav-item {
+          width: 100%;
+        }
+
+        .before-dropdown {
+          position: static;
+          width: min(100%, 230px);
+          margin-top: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="reference-scene">
+      <div class="wild-column" aria-hidden="true"></div>
+
+      <nav class="reference-nav" aria-label="Before navigation">
+        <div class="nav-item">
+          <button class="nav-link" type="button" aria-expanded="false">Product <span>⌄</span></button>
+        </div>
+        <div class="nav-item">
+          <button class="nav-link" type="button" aria-expanded="false">Resources <span>⌄</span></button>
+        </div>
+        <div class="nav-item" data-open="true">
+          <button class="nav-link" type="button" aria-expanded="true">Company <span>⌄</span></button>
+          <div class="before-dropdown">
+            <a href="#about">About</a>
+            <a href="#careers">Careers</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <p class="demo-label">Before · first reference page</p>
+    </main>
+
+    <script>
+      const items = document.querySelectorAll(".nav-item");
+
+      items.forEach((item) => {
+        const trigger = item.querySelector(".nav-link");
+        if (!trigger) return;
+
+        trigger.addEventListener("click", () => {
+          const nextOpen = item.dataset.open !== "true";
+          items.forEach((entry) => {
+            entry.dataset.open = "false";
+            entry.querySelector(".nav-link")?.setAttribute("aria-expanded", "false");
+          });
+          item.dataset.open = String(nextOpen);
+          trigger.setAttribute("aria-expanded", String(nextOpen));
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key !== "Escape") return;
+        items.forEach((entry) => {
+          entry.dataset.open = "false";
+          entry.querySelector(".nav-link")?.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
+  </body>
+</html>

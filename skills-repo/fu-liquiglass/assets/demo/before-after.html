@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e9f2fb" />
+    <title>FU—Liquiglass Before / After Demo</title>
+    <style>
+      :root {
+        color: #0d1728;
+        background: #e7f0f8;
+        font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-synthesis: none;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 320px;
+        min-height: 100svh;
+        margin: 0;
+        background:
+          radial-gradient(circle at 12% 8%, rgb(255 255 255 / 0.95), transparent 23%),
+          radial-gradient(circle at 86% 12%, rgb(238 205 191 / 0.62), transparent 28%),
+          radial-gradient(circle at 85% 76%, rgb(87 132 167 / 0.35), transparent 34%),
+          linear-gradient(140deg, #f5f9fc 0%, #dbeaf5 44%, #c9d8eb 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .showcase {
+        width: min(1380px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 56px 0;
+      }
+
+      .showcase-header {
+        display: grid;
+        grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.55fr);
+        gap: 40px;
+        align-items: end;
+        margin-bottom: 30px;
+      }
+
+      .eyebrow {
+        margin: 0 0 14px;
+        color: rgb(13 23 40 / 0.56);
+        font-size: 12px;
+        font-weight: 760;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 900px;
+        margin: 0;
+        font-size: clamp(42px, 6vw, 86px);
+        font-weight: 680;
+        line-height: 0.94;
+        letter-spacing: -0.07em;
+      }
+
+      .intro {
+        margin: 0;
+        color: rgb(13 23 40 / 0.66);
+        font-size: 16px;
+        line-height: 1.6;
+      }
+
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .comparison-card {
+        overflow: hidden;
+        border: 1px solid rgb(255 255 255 / 0.68);
+        border-radius: 30px;
+        background: rgb(255 255 255 / 0.42);
+        box-shadow:
+          0 28px 80px rgb(38 58 85 / 0.16),
+          inset 0 1px 0 rgb(255 255 255 / 0.68);
+        -webkit-backdrop-filter: blur(18px) saturate(132%);
+        backdrop-filter: blur(18px) saturate(132%);
+      }
+
+      .card-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 72px;
+        padding: 18px 20px;
+      }
+
+      .card-title {
+        display: grid;
+        gap: 4px;
+      }
+
+      .card-title strong {
+        font-size: 17px;
+        letter-spacing: -0.03em;
+      }
+
+      .card-title span {
+        color: rgb(13 23 40 / 0.54);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .open-link {
+        flex: 0 0 auto;
+        padding: 9px 12px;
+        border: 1px solid rgb(13 23 40 / 0.1);
+        border-radius: 999px;
+        background: rgb(255 255 255 / 0.44);
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .frame-wrap {
+        aspect-ratio: 676 / 436;
+        overflow: hidden;
+        border-top: 1px solid rgb(255 255 255 / 0.54);
+        background: rgb(255 255 255 / 0.45);
+      }
+
+      iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .note {
+        margin: 24px 0 0;
+        color: rgb(13 23 40 / 0.58);
+        font-size: 14px;
+        line-height: 1.55;
+      }
+
+      :focus-visible {
+        outline: 3px solid rgb(14 74 128 / 0.72);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 980px) {
+        .showcase-header,
+        .comparison-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .showcase {
+          width: min(100% - 28px, 820px);
+          padding-block: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="showcase">
+      <header class="showcase-header">
+        <div>
+          <p class="eyebrow">FU—Liquiglass skill demo</p>
+          <h1>Before / After liquid-glass navigation.</h1>
+        </div>
+        <p class="intro">
+          The left side recreates the first reference page structure. The right side shows the same
+          navigation problem treated as a complete liquid-glass system: calmer background, stronger
+          material hierarchy, clearer motion, and mobile-ready behavior.
+        </p>
+      </header>
+
+      <section class="comparison-grid" aria-label="Before and after comparison">
+        <article class="comparison-card">
+          <div class="card-bar">
+            <div class="card-title">
+              <span>Before</span>
+              <strong>First reference page</strong>
+            </div>
+            <a class="open-link" href="./before.html">Open</a>
+          </div>
+          <div class="frame-wrap">
+            <iframe src="./before.html" title="Before navigation demo"></iframe>
+          </div>
+        </article>
+
+        <article class="comparison-card">
+          <div class="card-bar">
+            <div class="card-title">
+              <span>After</span>
+              <strong>FU—Liquiglass upgrade</strong>
+            </div>
+            <a class="open-link" href="./index.html?menu=open">Open</a>
+          </div>
+          <div class="frame-wrap">
+            <iframe src="./index.html?menu=open" title="After liquid-glass navigation demo"></iframe>
+          </div>
+        </article>
+      </section>
+
+      <p class="note">
+        Tip: use this page when explaining what the Skill changes. Use the individual pages for
+        close-up screenshots or live hover/click demonstrations.
+      </p>
+    </main>
+  </body>
+</html>

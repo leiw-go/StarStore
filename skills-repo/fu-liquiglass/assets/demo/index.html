@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#d9e8ff" />
+    <title>FU—Liquiglass Demo</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true">
+      <span class="orb orb--blue"></span>
+      <span class="orb orb--violet"></span>
+      <span class="orb orb--peach"></span>
+      <span class="grain"></span>
+    </div>
+
+    <header class="site-header">
+      <nav class="glass nav-shell" aria-label="Primary navigation">
+        <a class="brand" href="#" aria-label="Aperture home">
+          <span class="brand-mark"></span>
+          <span>Aperture</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+          <span>Menu</span>
+          <span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+          <div class="nav-item">
+            <button class="nav-trigger" type="button" aria-expanded="false">
+              Discover <span aria-hidden="true">⌄</span>
+            </button>
+            <div class="glass dropdown">
+              <a href="#vision">Vision</a>
+              <a href="#materials">Materials</a>
+              <a href="#motion">Motion</a>
+            </div>
+          </div>
+          <a href="#journal">Journal</a>
+          <a href="#studio">Studio</a>
+        </div>
+
+        <a class="glass action" href="#contact">Start a project</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Digital material study · 2026</p>
+        <h1>Interfaces with<br />light inside them.</h1>
+        <p class="lede">
+          A restrained liquid-glass system for navigation, controls, and layered content—clear
+          enough to use, dimensional enough to feel.
+        </p>
+        <div class="hero-actions">
+          <a class="glass primary-action" href="#materials">Explore the system</a>
+          <a class="text-action" href="#motion">See motion principles <span>↗</span></a>
+        </div>
+      </section>
+
+      <section class="glass detail-card" id="materials">
+        <div>
+          <p class="eyebrow">Material stack</p>
+          <h2>Tint. Blur. Edge light. Depth.</h2>
+        </div>
+        <p>
+          The glass stays quiet so the landscape can breathe. Hover the navigation and resize the
+          viewport to inspect the interaction model.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>
+
