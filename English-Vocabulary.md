@@ -8,7 +8,7 @@
 
 ## 📊 统计
 
-- **总词数：** 9
+- **总词数：** 10
 - **创建日期：** 2026-07-01
 - **最近更新：** 2026-07-09
 
@@ -33,6 +33,14 @@
   > 例：_We're piloting the new software with 50 users first._ / _The show was picked up after a strong pilot episode._
   > 近义辨析：pilot（小范围制度性试点） vs trial（短期试用） vs beta（软件公测） vs prototype（原型） vs MVP（最小可行产品）
   > 词源：希腊语 pēdon（桨）→ 拉丁语 pilotus → 意大利语 pilota → 法语 pilote；原义是"用桨引导船的人"，飞机出现后词义迁移到"飞行员"，主语义反而盖过了原义
+- **asset** /ˈæset/ — n. 资产，财产；（引申）宝贵的人/资源/优势；IT/数字资产
+  > 三大语义场：① 会计/金融本义：会计恒等式 Assets = Liabilities + Equity；current assets（流动） / fixed assets（固定） / intangible assets（无形） / financial assets（金融） / net assets（净资产） / total assets（总资产） / digital assets（数字） ② 职场引申：a great asset to the team 团队宝贵的人；对比 liability 拖后腿的人 ③ IT/数字：IT asset management、数字资产
+  > 常见搭配：asset bubble 资产泡沫 / asset allocation 资产配置 / asset class 资产类别 / asset turnover 资产周转率 / frozen assets 冻结资产 / toxic assets 有毒资产 / asset-rich, cash-poor 有资产但缺现金
+  > 派生词：assess v. 评估 / assessment n. 评估、税务评估
+  > 例：_She's a real asset to the company—promote her._ / _His language skills are his biggest asset in this role._ / _The firm's total assets exceeded $1 billion._
+  > 近义辨析：asset（会计正式） vs property（偏不动产） vs wealth（财富总额） vs resource（资源） vs belongings（随身物品） vs estate（遗产/房产）
+  > 反义：liability 负债、负担 / debt 债务
+  > 词源：古法语 avoir（有、拥有）→ 盎格鲁-诺曼语 assetz；原义是法律术语"足够偿债的财产"或"可继承遗产"，后扩展为"任何有价值的东西"并外推到人
 
 ### 2026-07-04
 
