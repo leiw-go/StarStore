@@ -1,4 +1,0 @@
-interface:
-  display_name: "FU—Liquiglass"
-  short_description: "把任意网页升级为克制清晰、可访问且高性能的液态玻璃界面"
-  default_prompt: "Use $fu-liquiglass to redesign and implement this webpage with a polished Apple-inspired liquid-glass system."
