@@ -8,9 +8,9 @@
 
 ## 📊 统计
 
-- **总词数：** 10
+- **总词数：** 12
 - **创建日期：** 2026-07-01
-- **最近更新：** 2026-07-09
+- **最近更新：** 2026-07-16
 
 ---
 
@@ -18,6 +18,23 @@
 
 <!-- AUTO-APPEND-START -->
 <!-- 每次查词时自动插入到本注释下方 -->
+
+### 2026-07-16
+
+- **lo mein** /loʊ ˈmeɪn/ — n. 捞面；拌面（中式面食，煮软的面条与蔬菜、肉类、海鲜等配料和酱汁一起翻炒/拌匀，口感偏软）
+  > 词源：粤语音译，"lo"（捞）+ "mein"（面）= "捞起的面"，与 chow mein（炒面）形成对照
+  > 辨析：lo mein（面条煮后拌炒，口感软糯）vs chow mein（面条先煎/炒脆，口感酥脆，常配粤语"炒面"）；美式中餐外卖常见 dish
+  > 例：_I'll have a chicken lo mein, please._（请给我一份鸡肉捞面）/ _The lo mein was swimming in soy sauce._（这捞面酱油放得太多了）
+  > 关联词：chow mein 炒面 / mei fun 米粉 / pad thai 泰式炒河粉 / ramen 拉面 / udon 乌冬 / pho 越南粉
+
+### 2026-07-12
+
+- **crunch** /krʌntʃ/ — v./n. 嘎吱嘎吱地咬/压碎；嘎吱声；n. 紧要关头；紧缩/危机；（口语）仰卧起坐；脆爽口感
+  > 词源：拟声词（late Middle English "cruncchen"），约 15 世纪出现；2008 金融危机使 credit crunch（信贷紧缩）成为全民词汇
+  > 常见搭配：crunch time 关键时刻；credit/budget crunch 信贷/预算紧缩；energy crunch 能源危机；number crunching 大量数据运算；when it comes to the crunch 到了紧要关头；crunch the numbers 算算数字；ab crunch 仰卧起坐；a satisfying crunch 令人满足的脆响
+  > 例：_We need more staff to handle the number crunching before the deadline._ / _When it came to the crunch, she didn't back down._ / _He bit into the apple with a loud crunch._
+  > 同义：crush, grind, gnash, scrunch（咬碎义）/ crisis, pinch, pressure, showdown（关键时刻义）
+  > 反义：abundance, plenty, ease, calm（危机义）
 
 ### 2026-07-09
 
