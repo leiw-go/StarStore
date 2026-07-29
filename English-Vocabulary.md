@@ -8,9 +8,9 @@
 
 ## 📊 统计
 
-- **总词数：** 12
+- **总词数：** 13
 - **创建日期：** 2026-07-01
-- **最近更新：** 2026-07-16
+- **最近更新：** 2026-07-29
 
 ---
 
@@ -18,6 +18,17 @@
 
 <!-- AUTO-APPEND-START -->
 <!-- 每次查词时自动插入到本注释下方 -->
+
+### 2026-07-29
+
+- **completion** /kəmˈpliːʃn/ — n. 完成；结束；竣工 / n. （编程）自动补全（IDE/编辑器按上下文提示候选词的功能）
+  > 两个主要语义场：① 通用「完成」（on completion / completion date / project completion / course completion / completion rate）；② 编程「自动补全」（code completion / autocomplete / tab completion / bracket completion / line completion / completion API）
+  > 编程重点：OpenAI 的 Completion API（`/v1/completions`）是按 prompt 续写下一个 token 的接口，对应参数 model、prompt、max_tokens、temperature、stop；后来被 Chat Completions API（`/v1/chat/completions`，对话式）逐步取代——所以现在文档里 completion 多半指后者
+  > 词族：complete v./adj. 完成（的）/ completion n. 完成（行为）/ completeness n. 完整性（状态）/ incomplete adj. 未完成的 / self-completed 自完成的
+  > 常见搭配：on completion 完成时；completion certificate 完工/结业证书；near completion 接近完工；task completion 任务完成；bracket/quote completion 括号/引号自动补全
+  > 例：_Please notify HR on completion of your probation period._ / _VS Code's IntelliSense provides intelligent code completion as you type._ / _The model is served via the /v1/chat/completions endpoint._
+  > 同义：fulfillment, conclusion, finish, accomplishment, realization
+  > 反义：incompletion, start, beginning, inception
 
 ### 2026-07-16
 
